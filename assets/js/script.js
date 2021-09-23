@@ -1,74 +1,110 @@
 var day = moment().format("dddd, MMMM Do YYYY");
 var currentTime = moment().format("hh:mm");
-console.log(currentTime);
-
 $("#currentDay").html(day);
+
+var tasks = {};
 
 function colorTime() {
   var hour = moment().hour();
   if (hour < 9) {
-    $("#9am").addClass("future");
+    $("#nineam").addClass("future");
   } else if (hour === 9) {
-    $("#9am").addClass("present");
+    $("#nineam").addClass("present");
   } else if (hour > 9) {
-    $("#9am").addClass("past");
+    $("#nineam").addClass("past");
   }
   if (hour < 10) {
-    $("#10am").addClass("future");
+    $("#tenam").addClass("future");
   } else if (hour === 10) {
-    $("#10am").addClass("present");
+    $("#tenam").addClass("present");
   } else if (hour > 10) {
-    $("#10am").addClass("past");
+    $("#tenam").addClass("past");
   }
   if (hour < 11) {
-    $("#11am").addClass("future");
+    $("#elevenam").addClass("future");
   } else if (hour === 11) {
-    $("#11am").addClass("present");
+    $("#elevenam").addClass("present");
   } else if (hour > 11) {
-    $("#11am").addClass("past");
+    $("#elevenam").addClass("past");
   }
   if (hour < 12) {
-    $("#12am").addClass("future");
+    $("#twelvepm").addClass("future");
   } else if (hour === 12) {
-    $("#12am").addClass("present");
+    $("#twelvepm").addClass("present");
   } else if (hour > 12) {
-    $("#12pm").addClass("past");
+    $("#twelvepm").addClass("past");
   }
   if (hour < 13) {
-    $("#1pm").addClass("future");
+    $("#onepm").addClass("future");
   } else if (hour === 13) {
-    $("#1pm").addClass("present");
+    $("#onepm").addClass("present");
   } else if (hour > 13) {
-    $("#1pm").addClass("past");
+    $("#onepm").addClass("past");
   }
   if (hour < 14) {
-    $("#2pm").addClass("future");
+    $("#twopm").addClass("future");
   } else if (hour === 14) {
-    $("#2pm").addClass("present");
+    $("#twopm").addClass("present");
   } else if (hour > 14) {
-    $("#2pm").addClass("past");
+    $("#twopm").addClass("past");
   }
   if (hour < 15) {
-    $("#3pm").addClass("future");
+    $("#threepm").addClass("future");
   } else if (hour === 15) {
-    $("#3pm").addClass("present");
+    $("#threepm").addClass("present");
   } else if (hour > 15) {
-    $("#3pm").addClass("past");
+    $("#threepm").addClass("past");
   }
   if (hour < 16) {
-    $("#4pm").addClass("future");
+    $("#fourpm").addClass("future");
   } else if (hour === 16) {
-    $("#4pm").addClass("present");
+    $("#fourpm").addClass("present");
   } else if (hour > 16) {
-    $("#4pm").addClass("past");
+    $("#fourpm").addClass("past");
   }
   if (hour < 17) {
-    $("#5pm").addClass("future");
+    $("#fivepm").addClass("future");
   } else if (hour === 17) {
-    $("#5pm").addClass("present");
+    $("#fivepm").addClass("present");
   } else if (hour > 17) {
-    $("#5pm").addClass("past");
+    $("#fivepm").addClass("past");
   }
 }
 
+$(".description").on("click", "textarea", function () {
+  var text = $(this).text().trim();
+  var textInput = $("<textarea>").val(text);
+
+  textInput.trigger("focus");
+});
+
+$(".description").on("blur", "textarea", function () {
+  var text = $(this).val().trim();
+  var id = $(this).closest(".description").attr("id");
+  console.log(text);
+  saveTasks(text);
+});
+
+function saveTasks(text) {
+  localStorage.setItem("tasks", JSON.stringify(text));
+}
+
+function loadTasks() {
+  tasks = JSON.parse(localStorage.getItem("tasks"));
+
+  // if nothing is in localStorage
+  if (!tasks) {
+    tasks = {
+      nineam: [],
+      tenam: [],
+      elevenam: [],
+      twelvepm: [],
+      onepm: [],
+      twopm: [],
+      threepm: [],
+      fourpm: [],
+      fivepm: [],
+    };
+  }
+}
 colorTime();
