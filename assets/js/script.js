@@ -2,8 +2,6 @@ var day = moment().format("dddd, MMMM Do YYYY");
 var currentTime = moment().format("hh:mm");
 $("#currentDay").html(day);
 
-var tasks = {};
-
 function colorTime() {
   var hour = moment().hour();
   if (hour < 9) {
@@ -71,40 +69,80 @@ function colorTime() {
   }
 }
 
-$(".description").on("click", "textarea", function () {
-  var text = $(this).text().trim();
-  var textInput = $("<textarea>").val(text);
-
-  textInput.trigger("focus");
+$("#saveNine").on("click", function (event) {
+  event.preventDefault();
+  var taskNine = $("#nineam").val().trim();
+  localStorage.setItem("nine-am", taskNine);
 });
 
-$(".description").on("blur", "textarea", function () {
-  var text = $(this).val().trim();
-  var id = $(this).closest(".description").attr("id");
-  console.log(text);
-  saveTasks(text);
+$("#saveTen").on("click", function (event) {
+  event.preventDefault();
+  var taskTen = $("#tenam").val().trim();
+  localStorage.setItem("ten-am", taskTen);
 });
 
-function saveTasks(text) {
-  localStorage.setItem("tasks", JSON.stringify(text));
+$("#saveEleven").on("click", function (event) {
+  event.preventDefault();
+  var taskEleven = $("#elevenam").val().trim();
+  localStorage.setItem("eleven-am", taskEleven);
+});
+
+$("#saveTwelve").on("click", function (event) {
+  event.preventDefault();
+  var taskTwelve = $("#twelvepm").val().trim();
+  localStorage.setItem("twelve-pm", taskTwelve);
+});
+
+$("#saveOne").on("click", function (event) {
+  event.preventDefault();
+  var taskOne = $("#onepm").val().trim();
+  localStorage.setItem("one-pm", taskOne);
+});
+
+$("#saveTwo").on("click", function (event) {
+  event.preventDefault();
+  var taskTwo = $("#twopm").val().trim();
+  localStorage.setItem("two-pm", taskTwo);
+});
+
+$("#saveThree").on("click", function (event) {
+  event.preventDefault();
+  var taskThree = $("#threepm").val().trim();
+  localStorage.setItem("three-pm", taskThree);
+});
+
+$("#saveFour").on("click", function (event) {
+  event.preventDefault();
+  var taskFour = $("#fourpm").val().trim();
+  localStorage.setItem("four-pm", taskFour);
+});
+
+$("#saveFive").on("click", function (event) {
+  event.preventDefault();
+  var taskFive = $("#fivepm").val().trim();
+  localStorage.setItem("five-pm", taskFive);
+});
+
+function loadTask() {
+  var nineAmEl = localStorage.getItem("nine-am");
+  $("#nineam").append(nineAmEl);
+  var tenAmEl = localStorage.getItem("ten-am");
+  $("#tenam").append(tenAmEl);
+  var elevenAmEl = localStorage.getItem("eleven-am");
+  $("#elevenam").append(elevenAmEl);
+  var twelvePmEl = localStorage.getItem("twelve-pm");
+  $("#twelvepm").append(twelvePmEl);
+  var onePmEl = localStorage.getItem("one-pm");
+  $("#onepm").append(onePmEl);
+  var twoPmEl = localStorage.getItem("two-pm");
+  $("#twopm").append(twoPmEl);
+  var threePmEl = localStorage.getItem("three-pm");
+  $("#threepm").append(threePmEl);
+  var fourPmEl = localStorage.getItem("four-pm");
+  $("#fourpm").append(fourPmEl);
+  var fivePmEl = localStorage.getItem("five-pm");
+  $("#fivepm").append(fivePmEl);
 }
 
-function loadTasks() {
-  tasks = JSON.parse(localStorage.getItem("tasks"));
-
-  // if nothing is in localStorage
-  if (!tasks) {
-    tasks = {
-      nineam: [],
-      tenam: [],
-      elevenam: [],
-      twelvepm: [],
-      onepm: [],
-      twopm: [],
-      threepm: [],
-      fourpm: [],
-      fivepm: [],
-    };
-  }
-}
+loadTask();
 colorTime();
