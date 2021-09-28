@@ -1,7 +1,9 @@
+// using moment to get date and format that data
 var day = moment().format("dddd, MMMM Do YYYY");
 var currentTime = moment().format("hh:mm");
 $("#currentDay").html(day);
 
+// created a function to update the class for what time of day it is
 function colorTime() {
   var hour = moment().hour();
   if (hour < 9) {
@@ -69,6 +71,8 @@ function colorTime() {
   }
 }
 
+// on click events for each save button
+
 $("#saveNine").on("click", function (event) {
   event.preventDefault();
   var taskNine = $("#nineam").val().trim();
@@ -123,6 +127,7 @@ $("#saveFive").on("click", function (event) {
   localStorage.setItem("five-pm", taskFive);
 });
 
+// function to load saved tasks from localStorage when page is refreshed
 function loadTask() {
   var nineAmEl = localStorage.getItem("nine-am");
   $("#nineam").append(nineAmEl);
@@ -144,5 +149,6 @@ function loadTask() {
   $("#fivepm").append(fivePmEl);
 }
 
+// calling two main functions for tasks
 loadTask();
 colorTime();
